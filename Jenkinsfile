@@ -1,35 +1,26 @@
 pipeline {
   agent any 
-
   stages {
-					
-				
     stage('Maven: clean project') {
-              steps {
-			bat """ 
-
-				mvn clean
-                
-                """
-              }
+      steps {
+			  bat """ 
+			    mvn clean
+          """
+        }
     }
 	stage('Maven: package project') {
-              steps {
+      steps {
 				bat """
-
-				mvn package
-                
-                """
-              }
+				  mvn package 
+          """
+        }
     }
 	stage('Maven: test project') {
-              steps {
+      steps {
 				bat """
-
-				mvn test
-                
-                """
-              }
+				  mvn test      
+          """
+        }
     }
     stage('Send email notification'){
         steps{
@@ -49,44 +40,22 @@ pipeline {
 stage('Zip the project'){
   steps{
     bat """ del  "C:\\Program Files (x86)\\Jenkins\\workspace\\CI-W17\\ci_w17.zip"  """
-
-                    zip zipFile: 'ci_w17.zip', archive: false, dir: 'C:\\Program Files (x86)\\Jenkins\\workspace\\CI-W17'
-
+    zip zipFile: 'ci_w17.zip', archive: false, dir: 'C:\\Program Files (x86)\\Jenkins\\workspace\\CI-W17'
   }
-
 }
 
-stage('Archive zip folder'){
-  steps{
-
-archiveArtifacts artifacts: 'ci_w17.zip', fingerprint: true
-  }
-
-}
-
-
-
-
-
-
-
-
-
-  }
-
-
-      post {
-        always {
-           // archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
-            junit 'target//surefire-reports/*.xml'
-
-            recordIssues enabledForFailure: true, tools: [mavenConsole(), java(), javaDoc()]
-
-
-
-        }
+  stage('Archive zip folder'){
+    steps{
+      archiveArtifacts artifacts: 'ci_w17.zip', fingerprint: true
     }
-
-
+  }
+}
+    post {
+      always {
+          junit 'target//surefire-reports/*.xml'
+          recordIssues enabledForFailure: true, tools: [mavenConsole(), java(), javaDoc()]
+          archiveArtifacts artifacts: mavenConsole(), fingerprint: true
+      }
+  }
 }
 
