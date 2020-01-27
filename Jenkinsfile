@@ -42,7 +42,7 @@ pipeline {
             mimeType: 'text/html', 
             replyTo: '', 
             subject: "EDISON ${env.JOB_NAME} Build Number: ${env.BUILD_NUMBER} ", 
-            to: "hadi.elme92@gmail.com";  
+            to: "hadi.elmekawi@ge.com";  
 
         }
     }
