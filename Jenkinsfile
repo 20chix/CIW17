@@ -38,11 +38,11 @@ pipeline {
             body: "<b>Edison CI project </b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL for build: ${env.BUILD_URL}", 
             cc: '', 
             charset: 'UTF-8', 
-            from: 'hadi.elme92@gmail.com', 
+            from: 'hadi.elmekawi@ge.com', 
             mimeType: 'text/html', 
             replyTo: '', 
             subject: "EDISON ${env.JOB_NAME} Build Number: ${env.BUILD_NUMBER} ", 
-            to: "hadi.elme92@gmail.com";  
+            to: "hadi.elmekawi@ge.com";  
 
         }
     }
