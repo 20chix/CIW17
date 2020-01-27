@@ -19,6 +19,6 @@ public class Fibonacci
 			b = fib;
 		}
 		
-		return 70;
+		return fib;
 	}
 }
