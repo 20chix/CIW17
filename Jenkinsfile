@@ -54,7 +54,6 @@ stage('Zip the project'){
       always {
           junit 'target//surefire-reports/*.xml'
           recordIssues enabledForFailure: true, tools: [mavenConsole(), java(), javaDoc()]
-          archiveArtifacts artifacts: mavenConsole(), fingerprint: true
       }
   }
 }
